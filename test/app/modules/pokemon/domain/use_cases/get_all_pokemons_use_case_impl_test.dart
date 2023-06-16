@@ -29,8 +29,8 @@ void main() {
   });
 
   test(
-    "Deve retornar um Right(List<PokemonEntity>) quando o repository "
-    "retornar um Right(List<PokemonEntity>)",
+    'Deve retornar um Right(List<PokemonEntity>) quando o repository '
+    'retornar um Right(List<PokemonEntity>)',
     () async {
       when(
         () => repository.getAll(params: any(named: "params")),
@@ -38,7 +38,7 @@ void main() {
         List<PokemonResumedEntity> pokemons = const [
           PokemonResumedEntity(
             id: 100,
-            name: "bulbasaur",
+            name: 'bulbasaur',
             types: [
               TypeEntity(
                 name: 'grass',
@@ -46,7 +46,7 @@ void main() {
                 color: 0xFFFFFFFF,
               ),
             ],
-          )
+          ),
         ];
 
         return Right<Failure, List<PokemonResumedEntity>>(pokemons);
@@ -59,8 +59,8 @@ void main() {
   );
 
   test(
-    "Deve retornar um Left(GetAllPokemonsLimitFailure) "
-    "quando o limit for menor que 1",
+    'Deve retornar um Left(GetAllPokemonsLimitFailure) '
+    'quando o limit for menor que 1',
     () async {
       var params = const GetAllPokemonsParams(
         limit: 0,
@@ -75,8 +75,8 @@ void main() {
   );
 
   test(
-    "Deve retornar um Left(GetAllPokemonsLimitFailure) "
-    "quando o limit for maior que 10",
+    'Deve retornar um Left(GetAllPokemonsLimitFailure) '
+    'quando o limit for maior que 10',
     () async {
       var params = const GetAllPokemonsParams(
         limit: 11,
@@ -91,8 +91,8 @@ void main() {
   );
 
   test(
-    "Deve retornar um Left(GetAllPokemonsOffsetFailure) "
-    "quando o limit for menor que 0",
+    'Deve retornar um Left(GetAllPokemonsOffsetFailure) '
+    'quando o limit for menor que 0',
     () async {
       var params = const GetAllPokemonsParams(
         limit: 10,
@@ -107,8 +107,8 @@ void main() {
   );
 
   test(
-    "Deve retornar um Left(Failure) quando o repository "
-    "retornar um Left(Failure)",
+    'Deve retornar um Left(Failure) quando o repository '
+    'retornar um Left(Failure)',
     () async {
       when(
         () => repository.getAll(params: any(named: 'params')),
