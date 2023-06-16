@@ -37,7 +37,6 @@ void main() {
       ).thenAnswer((_) async {
         List<PokemonResumedEntity> pokemons = const [
           PokemonResumedEntity(
-            id: 100,
             name: 'bulbasaur',
             types: [
               TypeEntity(

@@ -27,7 +27,6 @@ void main() {
     repository = PokemonRepositoryImpl(remoteDataSource, localDataSource);
 
     pokemon = const PokemonResumedEntity(
-      id: 100,
       name: 'bulbasaur',
       types: [
         TypeEntity(
