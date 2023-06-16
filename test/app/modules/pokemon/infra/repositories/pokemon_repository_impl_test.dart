@@ -75,8 +75,9 @@ void main() {
           saved: true,
         );
 
-        when(() => localDataSource.getAll())
-            .thenAnswer((_) async => [pokemonResumed]);
+        when(
+          () => localDataSource.getAll(params: any(named: 'params')),
+        ).thenAnswer((_) async => [pokemonResumed]);
 
         var result = await repository.getAll(params: params);
 
@@ -112,7 +113,9 @@ void main() {
           saved: true,
         );
 
-        when(() => localDataSource.getAll()).thenThrow(Failure(message: ""));
+        when(
+          () => localDataSource.getAll(params: any(named: 'params')),
+        ).thenThrow(Failure(message: ""));
 
         var result = await repository.getAll(params: params);
 

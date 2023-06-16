@@ -1,5 +1,7 @@
 import '../../domain/entities/entities.dart';
 
+import '../hive/hive.dart';
+
 import 'mappers.dart';
 
 class PokemonMapper {
@@ -28,6 +30,35 @@ class PokemonMapper {
           .cast<String>(),
       types: TypeMapper.fromList(json['types']),
       stats: StatMapper.fromList(json['stats']),
+    );
+  }
+
+  static List<PokemonResumedEntity> resumedFromHiveList(List list) {
+    return list.map((element) => resumedFromHive(element)).toList();
+  }
+
+  static PokemonResumedEntity resumedFromHive(PokemonHiveObject hiveObject) {
+    return PokemonResumedEntity(
+      name: hiveObject.name,
+      types: TypeMapper.fromHiveList(hiveObject.types),
+    );
+  }
+
+  static List<PokemonEntity> fromHiveList(List list) {
+    return list.map((element) => fromHive(element)).toList();
+  }
+
+  static PokemonEntity fromHive(PokemonHiveObject hiveObject) {
+    return PokemonEntity(
+      id: hiveObject.id,
+      name: hiveObject.name,
+      height: hiveObject.height,
+      weight: hiveObject.weight,
+      image: hiveObject.image,
+      baseExperience: hiveObject.baseExperience,
+      abilities: hiveObject.abilities,
+      types: TypeMapper.fromHiveList(hiveObject.types),
+      stats: StatMapper.fromHiveList(hiveObject.stats),
     );
   }
 }

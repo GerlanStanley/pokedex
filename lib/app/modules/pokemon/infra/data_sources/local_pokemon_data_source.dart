@@ -2,7 +2,9 @@ import '../../domain/entities/entities.dart';
 import '../../domain/params/params.dart';
 
 abstract class LocalPokemonDataSource {
-  Future<List<PokemonResumedEntity>> getAll();
+  Future<List<PokemonResumedEntity>> getAll({
+    required GetAllPokemonsParams params,
+  });
 
   Future<PokemonEntity?> get({required GetPokemonParams params});
 

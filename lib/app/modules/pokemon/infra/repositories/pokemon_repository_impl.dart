@@ -25,7 +25,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
     try {
       List<PokemonResumedEntity> result;
       if (params.saved) {
-        result = await _localDataSource.getAll();
+        result = await _localDataSource.getAll(params: params);
       } else {
         result = await _remoteDataSource.getAll(params: params);
       }
