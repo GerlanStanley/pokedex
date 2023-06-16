@@ -1,11 +1,11 @@
 import '../../domain/entities/entities.dart';
 
 class TypeMapper {
-  static List<TypeEntity> resumedFromList(List list) {
-    return list.map((element) => resumedFromMap(element)).toList();
+  static List<TypeEntity> fromList(List list) {
+    return list.map((element) => fromMap(element)).toList();
   }
 
-  static TypeEntity resumedFromMap(Map json) {
+  static TypeEntity fromMap(Map json) {
     return TypeEntity(
       name: json['type']['name'],
       color: _types[json['type']['name']]!.color,

@@ -19,15 +19,34 @@ void main() {
   late MockRemotePokemonDataSource remoteDataSource;
   late MockLocalPokemonDataSource localDataSource;
   late PokemonRepositoryImpl repository;
-  late PokemonResumedEntity pokemon;
+  late PokemonResumedEntity pokemonResumed;
+  late PokemonEntity pokemon;
 
   setUp(() {
     remoteDataSource = MockRemotePokemonDataSource();
     localDataSource = MockLocalPokemonDataSource();
     repository = PokemonRepositoryImpl(remoteDataSource, localDataSource);
 
-    pokemon = const PokemonResumedEntity(
+    pokemonResumed = const PokemonResumedEntity(
       name: 'bulbasaur',
+      types: [
+        TypeEntity(
+          name: 'grass',
+          image: 'assets/images',
+          color: 0xFFFFFFFF,
+        ),
+      ],
+    );
+
+    pokemon = const PokemonEntity(
+      id: 1,
+      name: 'bulbasaur',
+      height: 1,
+      weight: 1,
+      image: 'image',
+      baseExperience: 1,
+      abilities: [],
+      stats: [],
       types: [
         TypeEntity(
           name: 'grass',
@@ -42,7 +61,8 @@ void main() {
       offset: 0,
       saved: false,
     ));
-    registerFallbackValue(pokemon);
+
+    registerFallbackValue(const GetPokemonParams(name: 'bulbasaur'));
   });
 
   group('GetAll', () {
@@ -55,7 +75,8 @@ void main() {
           saved: true,
         );
 
-        when(() => localDataSource.getAll()).thenAnswer((_) async => [pokemon]);
+        when(() => localDataSource.getAll())
+            .thenAnswer((_) async => [pokemonResumed]);
 
         var result = await repository.getAll(params: params);
 
@@ -74,7 +95,7 @@ void main() {
 
         when(
           () => remoteDataSource.getAll(params: any(named: 'params')),
-        ).thenAnswer((_) async => [pokemon]);
+        ).thenAnswer((_) async => [pokemonResumed]);
 
         var result = await repository.getAll(params: params);
 
@@ -113,6 +134,72 @@ void main() {
         ).thenThrow(Failure(message: ""));
 
         var result = await repository.getAll(params: params);
+
+        expect(result.fold(id, id), isA<Failure>());
+      },
+    );
+  });
+
+  group('Get', () {
+    test(
+      'Deve retornar um PokemonEntity quando o local datasource retornar o objeto',
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(
+          () => localDataSource.get(params: params),
+        ).thenAnswer((_) async => pokemon);
+
+        var result = await repository.get(params: params);
+
+        expect(result.fold(id, id), isA<PokemonEntity>());
+      },
+    );
+
+    test(
+      'Deve retornar um PokemonEntity quando o remote datasource retornar o objeto',
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(
+          () => localDataSource.get(params: params),
+        ).thenAnswer((_) async => null);
+
+        when(
+          () => remoteDataSource.get(params: params),
+        ).thenAnswer((_) async => pokemon);
+
+        var result = await repository.get(params: params);
+
+        expect(result.fold(id, id), isA<PokemonEntity>());
+      },
+    );
+
+    test(
+      "Deve retornar um Failure quando o local datasource throws Failure",
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(
+          () => localDataSource.get(params: any(named: 'params')),
+        ).thenThrow(Failure(message: ""));
+
+        var result = await repository.get(params: params);
+
+        expect(result.fold(id, id), isA<Failure>());
+      },
+    );
+
+    test(
+      "Deve retornar um Failure quando o remote datasource throws Failure",
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(
+          () => localDataSource.get(params: any(named: 'params')),
+        ).thenThrow(Failure(message: ""));
+
+        var result = await repository.get(params: params);
 
         expect(result.fold(id, id), isA<Failure>());
       },

@@ -24,10 +24,12 @@ void main() {
       offset: 0,
       saved: false,
     ));
+
+    registerFallbackValue(const GetPokemonParams(name: 'bulbasaur'));
   });
 
   group('GetAll', () {
-    test("Deve retornar uma List<PokemonEntity>", () async {
+    test('Deve retornar uma List<PokemonEntity>', () async {
       var params = const GetAllPokemonsParams(
         limit: 2,
         offset: 0,
@@ -51,7 +53,8 @@ void main() {
       expect(result, isA<List<PokemonResumedEntity>>());
     });
 
-    test("Deve lançar uma HttpFailure quando status diferente de 200", () async {
+    test('Deve lançar uma HttpFailure quando status diferente de 200',
+        () async {
       var params = const GetAllPokemonsParams(
         limit: 2,
         offset: 0,
@@ -68,7 +71,7 @@ void main() {
     });
 
     test(
-      "Deve retornar um ParseFailure quando der qualquer outra exceção",
+      'Deve retornar um ParseFailure quando der qualquer outra exceção',
       () async {
         var params = const GetAllPokemonsParams(
           limit: 2,
@@ -85,7 +88,7 @@ void main() {
     );
 
     test(
-      "Deve retornar um ParseFailure quando não conseguir parsear a resposta",
+      'Deve retornar um ParseFailure quando não conseguir parsear a resposta',
       () async {
         var params = const GetAllPokemonsParams(
           limit: 2,
@@ -96,6 +99,59 @@ void main() {
         when(() => httpHelper.get(any())).thenAnswer((_) async => invalidJson);
 
         var result = dataSource.getAll(params: params);
+
+        expect(result, throwsA(isA<ParseFailure>()));
+      },
+    );
+  });
+
+  group('Get', () {
+    test('Deve retornar um PokemonEntity', () async {
+      var params = const GetPokemonParams(name: 'bulbasaur');
+
+      when(() => httpHelper.get(any())).thenAnswer((_) async => getSuccessJson);
+
+      var result = await dataSource.get(params: params);
+
+      expect(result, isA<PokemonEntity>());
+    });
+
+    test(
+      "Deve lançar uma HttpFailure quando status diferente de 200",
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(() => httpHelper.get(any())).thenThrow(
+          BadRequestHttpFailure(message: ""),
+        );
+
+        var result = dataSource.get(params: params);
+
+        expect(result, throwsA(isA<BadRequestHttpFailure>()));
+      },
+    );
+
+    test(
+      "Deve retornar um ParseFailure quando der qualquer outra exceção",
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(() => httpHelper.get(any())).thenThrow(Exception());
+
+        var result = dataSource.get(params: params);
+
+        expect(result, throwsA(isA<ParseFailure>()));
+      },
+    );
+
+    test(
+      "Deve retornar um ParseFailure quando não conseguir parsear a resposta",
+      () async {
+        var params = const GetPokemonParams(name: 'bulbasaur');
+
+        when(() => httpHelper.get(any())).thenAnswer((_) async => invalidJson);
+
+        var result = dataSource.get(params: params);
 
         expect(result, throwsA(isA<ParseFailure>()));
       },

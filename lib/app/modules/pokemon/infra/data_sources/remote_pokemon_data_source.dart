@@ -5,4 +5,6 @@ abstract class RemotePokemonDataSource {
   Future<List<PokemonResumedEntity>> getAll({
     required GetAllPokemonsParams params,
   });
+
+  Future<PokemonEntity> get({required GetPokemonParams params});
 }

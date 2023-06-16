@@ -1,6 +1,5 @@
 import '../../../../core/failures/failures.dart';
 import '../../../../core/helpers/http/http.dart';
-import '../../../../core/utils/utils.dart';
 
 import '../../domain/entities/entities.dart';
 import '../../domain/params/params.dart';
@@ -35,6 +34,23 @@ class RemotePokemonDataSourceImpl implements RemotePokemonDataSource {
       }
 
       return PokemonMapper.resumedFromList(mapResults);
+    } on Failure {
+      rethrow;
+    } catch (e, stackTrace) {
+      throw ParseFailure(
+        message: 'Erro ao mapear o json',
+        stackTrace: stackTrace,
+      );
+    }
+  }
+
+  @override
+  Future<PokemonEntity> get({
+    required GetPokemonParams params,
+  }) async {
+    try {
+      Map response = await _httpHelper.get('/pokemon/${params.name}');
+      return PokemonMapper.fromMap(response);
     } on Failure {
       rethrow;
     } catch (e, stackTrace) {

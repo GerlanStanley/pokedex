@@ -35,7 +35,24 @@ class PokemonRepositoryImpl implements PokemonRepository {
     }
   }
 
-  /*@override
+  @override
+  Future<Either<Failure, PokemonEntity>> get({
+    required GetPokemonParams params,
+  }) async {
+    try {
+      PokemonEntity? result = await _localDataSource.get(params: params);
+
+      if (result != null) {
+        return Right(result);
+      }
+
+      return Right(await _remoteDataSource.get(params: params));
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
+
+/*@override
   Future<Either<Failure, bool>> save({required PokemonEntity pokemon}) async {
     try {
       var response = await _localDataSource.save(pokemon: pokemon);
