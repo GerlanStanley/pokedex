@@ -1,0 +1,1 @@
+export 'get_all_pokemons_params.dart';
