@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../constants/colors_constants.dart';
 
-class ListEmptyWidget extends StatelessWidget {
+class EmptyListWidget extends StatelessWidget {
   final IconData iconData;
   final String title;
   final String subtitle;
 
-  const ListEmptyWidget({
+  const EmptyListWidget({
     Key? key,
     required this.iconData,
     required this.title,
@@ -27,7 +27,7 @@ class ListEmptyWidget extends StatelessWidget {
               Icon(
                 iconData,
                 size: 100,
-                color: ColorsConstants.textLight,
+                color: ColorsConstants.text,
               ),
               Text(
                 title,

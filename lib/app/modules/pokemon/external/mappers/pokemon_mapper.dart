@@ -11,7 +11,9 @@ class PokemonMapper {
 
   static PokemonResumedEntity resumedFromMap(Map json) {
     return PokemonResumedEntity(
+      id: json['id'],
       name: json['name'],
+      image: json['sprites']['other']['official-artwork']['front_default'],
       types: TypeMapper.fromList(json['types']),
     );
   }
@@ -22,7 +24,7 @@ class PokemonMapper {
       name: json['name'],
       height: json['height'],
       weight: json['weight'],
-      image: json['sprites']['other']['home']['front_default'],
+      image: json['sprites']['other']['official-artwork']['front_default'],
       baseExperience: json['base_experience'],
       abilities: json['abilities']
           .map((element) => element['ability']['name'])
@@ -39,7 +41,9 @@ class PokemonMapper {
 
   static PokemonResumedEntity resumedFromHive(PokemonHiveObject hiveObject) {
     return PokemonResumedEntity(
+      id: hiveObject.id,
       name: hiveObject.name,
+      image: hiveObject.image,
       types: TypeMapper.fromHiveList(hiveObject.types),
     );
   }

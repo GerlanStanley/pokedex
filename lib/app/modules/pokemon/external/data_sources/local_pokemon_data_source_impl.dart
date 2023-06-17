@@ -38,17 +38,6 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   }
 
   @override
-  Future<bool> delete({required PokemonEntity pokemon}) async {
-    List<PokemonHiveObject> results = box.get(key) ?? [];
-
-    results.removeWhere((element) => element.id == pokemon.id);
-
-    await box.put(key, results);
-
-    return true;
-  }
-
-  @override
   Future<bool> save({required PokemonEntity pokemon}) async {
     List<PokemonHiveObject> results = box.get(key) ?? [];
 
@@ -58,6 +47,17 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
     if (result == null) {
       results.add(PokemonMapper.toHive(pokemon));
     }
+
+    await box.put(key, results);
+
+    return true;
+  }
+
+  @override
+  Future<bool> delete({required PokemonEntity pokemon}) async {
+    List<PokemonHiveObject> results = box.get(key) ?? [];
+
+    results.removeWhere((element) => element.id == pokemon.id);
 
     await box.put(key, results);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../../core/constants/constants.dart';
 
@@ -16,7 +17,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 3)).then((_) {
-      Modular.to.navigate('/pokelist/');
+      Modular.to.navigate('/pokemon/');
     });
   }
 
@@ -25,11 +26,12 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: ColorsConstants.primary,
       body: Center(
-        child: Image.asset(
-          'assets/images/pokemon.png',
-          color: Colors.white,
-          width: 150,
-          height: 150,
+        child: Lottie.asset(
+          'assets/lotties/pokeball.json',
+          width: 100,
+          height: 100,
+          animate: true,
+          repeat: true,
         ),
       ),
     );

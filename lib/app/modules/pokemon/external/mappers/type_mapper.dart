@@ -10,7 +10,8 @@ class TypeMapper {
   static TypeEntity fromMap(Map json) {
     return TypeEntity(
       name: json['type']['name'],
-      color: _types[json['type']['name']]!.color,
+      colorLight: _types[json['type']['name']]!.colorLight,
+      colorDark: _types[json['type']['name']]!.colorDark,
       image: _types[json['type']['name']]!.image,
     );
   }
@@ -23,7 +24,8 @@ class TypeMapper {
     return TypeEntity(
       name: hiveObject.name,
       image: hiveObject.image,
-      color: hiveObject.color,
+      colorLight: hiveObject.colorLight,
+      colorDark: hiveObject.colorDark,
     );
   }
 
@@ -35,100 +37,123 @@ class TypeMapper {
     return TypeHiveObject(
       name: entity.name,
       image: entity.image,
-      color: entity.color,
+      colorLight: entity.colorLight,
+      colorDark: entity.colorDark,
     );
   }
 }
 
 class Type {
-  final int color;
+  final int colorLight;
+  final int colorDark;
   final String image;
 
   Type({
-    required this.color,
+    required this.colorLight,
+    required this.colorDark,
     required this.image,
   });
 }
 
 Map<String, Type> _types = {
   'normal': Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF9099a1,
+    colorDark: 0xFF70808f,
+    image: 'assets/images/normal.png',
   ),
   "fighting": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFce4069,
+    colorDark: 0xFFc32855,
+    image: 'assets/images/fighting.png',
   ),
   "flying": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF8fa8dd,
+    colorDark: 0xFF6889ce,
+    image: 'assets/images/flying.png',
   ),
   "poison": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFab6ac8,
+    colorDark: 0xFF9751b6,
+    image: 'assets/images/poison.png',
   ),
   "ground": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFd97746,
+    colorDark: 0xFFc56231,
+    image: 'assets/images/ground.png',
   ),
   "rock": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFc7b78b,
+    colorDark: 0xFFac9861,
+    image: 'assets/images/rock.png',
   ),
   "bug": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF90c12c,
+    colorDark: 0xFF74a510,
+    image: 'assets/images/bug.png',
   ),
   "ghost": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF5269ac,
+    colorDark: 0xFF395195,
+    image: 'assets/images/ghost.png',
   ),
   "steel": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF5a8ea1,
+    colorDark: 0xFF427689,
+    image: 'assets/images/steel.png',
   ),
   "fire": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFff9c54,
+    colorDark: 0xFFd17430,
+    image: 'assets/images/fire.png',
   ),
   "water": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF4d90d5,
+    colorDark: 0xFF3271b3,
+    image: 'assets/images/water.png',
   ),
   "grass": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFa2d16f,
+    colorDark: 0xFF84b450,
+    image: 'assets/images/grass.png',
   ),
   "electric": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFf3d23b,
+    colorDark: 0xFFd1b327,
+    image: 'assets/images/electric.png',
   ),
   "psychic": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFf97176,
+    colorDark: 0xFFde595e,
+    image: 'assets/images/psychic.png',
   ),
   "ice": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF74cec0,
+    colorDark: 0xFF54b5a6,
+    image: 'assets/images/ice.png',
   ),
   "dragon": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF0a6dc4,
+    colorDark: 0xFF0c5ea6,
+    image: 'assets/images/dragon.png',
   ),
   "dark": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF5a5366,
+    colorDark: 0xFF4c4459,
+    image: 'assets/images/dark.png',
   ),
   "fairy": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFec8fe6,
+    colorDark: 0xFFbf63b9,
+    image: 'assets/images/fairy.png',
   ),
   "unknown": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFFf3374a,
+    colorDark: 0xFFc51e2f,
+    image: 'assets/images/unknown.png',
   ),
   "shadow": Type(
-    color: 1,
-    image: 'teste',
+    colorLight: 0xFF4a4652,
+    colorDark: 0xFF403b4a,
+    image: 'assets/images/shadow.png',
   ),
 };

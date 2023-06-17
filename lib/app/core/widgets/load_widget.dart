@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class LoadWidget extends StatefulWidget {
-  final double? size;
-  final Color? color;
+  final double size;
   final EdgeInsets? margin;
 
   const LoadWidget({
     Key? key,
-    this.size,
-    this.color,
+    this.size = 100,
     this.margin,
   }) : super(key: key);
 
@@ -39,10 +38,17 @@ class _LoadWidgetState extends State<LoadWidget>
         width: widget.size,
         height: widget.size,
         margin: widget.margin,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(
-            widget.color ?? Theme.of(context).primaryColor,
-          ),
+        padding: EdgeInsets.all(widget.size * 0.05),
+        decoration: BoxDecoration(
+          color: Colors.white30,
+          borderRadius: BorderRadius.circular(50),
+        ),
+        child: Lottie.asset(
+          'assets/lotties/pokeball.json',
+          width: 50,
+          height: 50,
+          animate: true,
+          repeat: true,
         ),
       ),
     );

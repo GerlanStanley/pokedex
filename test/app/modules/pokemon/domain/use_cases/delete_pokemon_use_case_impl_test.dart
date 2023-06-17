@@ -30,7 +30,8 @@ void main() {
         TypeEntity(
           name: 'grass',
           image: 'assets/images',
-          color: 0xFFFFFFFF,
+          colorLight: 0xFFFFFFFF,
+          colorDark: 0xFFFFFFFF,
         ),
       ],
     );

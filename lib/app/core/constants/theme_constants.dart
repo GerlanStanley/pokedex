@@ -38,6 +38,7 @@ class ThemeConstants {
       ),
     ),
     tabBarTheme: const TabBarTheme(
+      indicatorColor: Colors.transparent,
       labelColor: ColorsConstants.tabBarSelectedText,
       unselectedLabelColor: ColorsConstants.tabBarUnselectedText,
       unselectedLabelStyle: TextStyle(
@@ -56,7 +57,7 @@ class ThemeConstants {
     textTheme: const TextTheme(
       displayLarge: TextStyle(
         color: ColorsConstants.text,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w900,
         fontSize: 30,
         fontFamily: "NunitoSans",
       ),
@@ -85,7 +86,7 @@ class ThemeConstants {
         fontFamily: "NunitoSans",
       ),
       titleSmall: TextStyle(
-        color: ColorsConstants.textExtraLight,
+        color: ColorsConstants.text,
         fontWeight: FontWeight.w500,
         fontSize: 16,
         fontFamily: "NunitoSans",

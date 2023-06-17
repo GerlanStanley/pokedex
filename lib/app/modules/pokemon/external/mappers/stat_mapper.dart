@@ -9,7 +9,7 @@ class StatMapper {
 
   static StatEntity fromMap(Map json) {
     return StatEntity(
-      name: json['stat']['name'],
+      name: editName(json['stat']['name']),
       baseStat: json['base_stat'],
       effort: json['effort'],
     );
@@ -37,5 +37,22 @@ class StatMapper {
       baseStat: entity.baseStat,
       effort: entity.effort,
     );
+  }
+
+  static String editName(String name) {
+    switch (name) {
+      case 'hp':
+        return 'HP';
+      case 'attack':
+        return 'Attack';
+      case 'defense':
+        return 'Defense';
+      case 'special-attack':
+        return 'Sp. Atk';
+      case 'special-defense':
+        return 'Sp. Def';
+      default:
+        return 'Speed';
+    }
   }
 }

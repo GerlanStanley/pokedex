@@ -28,12 +28,15 @@ void main() {
     repository = PokemonRepositoryImpl(remoteDataSource, localDataSource);
 
     pokemonResumed = const PokemonResumedEntity(
+      id: 1,
       name: 'bulbasaur',
+      image: 'image',
       types: [
         TypeEntity(
           name: 'grass',
           image: 'assets/images',
-          color: 0xFFFFFFFF,
+          colorLight: 0xFFFFFFFF,
+          colorDark: 0xFFFFFFFF,
         ),
       ],
     );
@@ -51,7 +54,8 @@ void main() {
         TypeEntity(
           name: 'grass',
           image: 'assets/images',
-          color: 0xFFFFFFFF,
+          colorLight: 0xFFFFFFFF,
+          colorDark: 0xFFFFFFFF,
         ),
       ],
     );

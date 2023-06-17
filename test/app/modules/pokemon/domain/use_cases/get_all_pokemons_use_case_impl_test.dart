@@ -37,12 +37,15 @@ void main() {
       ).thenAnswer((_) async {
         List<PokemonResumedEntity> pokemons = const [
           PokemonResumedEntity(
+            id: 1,
             name: 'bulbasaur',
+            image: 'image',
             types: [
               TypeEntity(
                 name: 'grass',
                 image: 'assets/images',
-                color: 0xFFFFFFFF,
+                colorLight: 0xFFFFFFFF,
+                colorDark: 0xFFFFFFFF,
               ),
             ],
           ),

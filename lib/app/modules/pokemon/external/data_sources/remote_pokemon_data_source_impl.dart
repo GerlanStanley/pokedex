@@ -30,6 +30,8 @@ class RemotePokemonDataSourceImpl implements RemotePokemonDataSource {
       }).toList());
 
       for (int i = 0; i < mapsUniquesResults.length; i++) {
+        mapResults[i]['id'] = mapsUniquesResults[i]['id'];
+        mapResults[i]['sprites'] = mapsUniquesResults[i]['sprites'];
         mapResults[i]['types'] = mapsUniquesResults[i]['types'];
       }
 

@@ -64,6 +64,7 @@ class PrimaryElevatedButtonWidget extends StatelessWidget {
               );
             },
           ),
+          overlayColor: MaterialStateProperty.all(Colors.black12),
         ),
         onPressed: onPressed,
         child: Row(
