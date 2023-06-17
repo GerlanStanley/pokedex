@@ -26,6 +26,18 @@ class TypeMapper {
       color: hiveObject.color,
     );
   }
+
+  static List<TypeHiveObject> toHiveList(List list) {
+    return list.map((element) => toHive(element)).toList();
+  }
+
+  static TypeHiveObject toHive(TypeEntity entity) {
+    return TypeHiveObject(
+      name: entity.name,
+      image: entity.image,
+      color: entity.color,
+    );
+  }
 }
 
 class Type {

@@ -13,4 +13,8 @@ abstract class PokemonRepository {
   Future<Either<Failure, PokemonEntity>> get({
     required GetPokemonParams params,
   });
+
+  Future<Either<Failure, bool>> save({required PokemonEntity pokemon});
+
+  Future<Either<Failure, bool>> delete({required PokemonEntity pokemon});
 }

@@ -63,6 +63,8 @@ void main() {
     ));
 
     registerFallbackValue(const GetPokemonParams(name: 'bulbasaur'));
+
+    registerFallbackValue(pokemon);
   });
 
   group('GetAll', () {
@@ -105,7 +107,7 @@ void main() {
     );
 
     test(
-      "Deve retornar um Failure quando o local datasource throws Failure",
+      'Deve retornar um Failure quando o local datasource throws Failure',
       () async {
         var params = const GetAllPokemonsParams(
           limit: 10,
@@ -124,7 +126,7 @@ void main() {
     );
 
     test(
-      "Deve retornar um Failure quando o remote datasource throws Failure",
+      'Deve retornar um Failure quando o remote datasource throws Failure',
       () async {
         var params = const GetAllPokemonsParams(
           limit: 10,
@@ -179,7 +181,7 @@ void main() {
     );
 
     test(
-      "Deve retornar um Failure quando o local datasource throws Failure",
+      'Deve retornar um Failure quando o local datasource throws Failure',
       () async {
         var params = const GetPokemonParams(name: 'bulbasaur');
 
@@ -194,7 +196,7 @@ void main() {
     );
 
     test(
-      "Deve retornar um Failure quando o remote datasource throws Failure",
+      'Deve retornar um Failure quando o remote datasource throws Failure',
       () async {
         var params = const GetPokemonParams(name: 'bulbasaur');
 
@@ -209,51 +211,55 @@ void main() {
     );
   });
 
-  /*test(
-    "Deve retornar uma bool quando o datasource salvar e retornar bool",
-    () async {
-      when(() => localDataSource.save(user: any(named: 'user')))
-          .thenAnswer((_) async => true);
+  group('Save', () {
+    test(
+      'Deve retornar uma bool quando o local datasource salvar e retornar bool',
+      () async {
+        when(() => localDataSource.save(pokemon: any(named: 'pokemon')))
+            .thenAnswer((_) async => true);
 
-      var result = await repository.save(user: user);
+        var result = await repository.save(pokemon: pokemon);
 
-      expect(result.fold(id, id), isA<bool>());
-    },
-  );
+        expect(result.fold(id, id), isA<bool>());
+      },
+    );
 
-  test(
-    "Deve retornar um Failure quando o datasource throws Failure",
-    () async {
-      when(() => localDataSource.save(user: any(named: 'user')))
-          .thenThrow(Failure(message: ""));
+    test(
+      'Deve retornar um Failure quando o local datasource throws Failure',
+      () async {
+        when(() => localDataSource.save(pokemon: any(named: 'pokemon')))
+            .thenThrow(Failure(message: ""));
 
-      var result = await repository.save(user: user);
+        var result = await repository.save(pokemon: pokemon);
 
-      expect(result.fold(id, id), isA<Failure>());
-    },
-  );
+        expect(result.fold(id, id), isA<Failure>());
+      },
+    );
+  });
 
-  test(
-    "Deve retornar uma bool quando o datasource deletar e retornar bool",
-    () async {
-      when(() => localDataSource.delete(user: any(named: 'user')))
-          .thenAnswer((_) async => true);
+  group('Delete', () {
+    test(
+      "Deve retornar uma bool quando o datasource deletar e retornar bool",
+      () async {
+        when(() => localDataSource.delete(pokemon: any(named: 'pokemon')))
+            .thenAnswer((_) async => true);
 
-      var result = await repository.delete(user: user);
+        var result = await repository.delete(pokemon: pokemon);
 
-      expect(result.fold(id, id), isA<bool>());
-    },
-  );
+        expect(result.fold(id, id), isA<bool>());
+      },
+    );
 
-  test(
-    "Deve retornar um Failure quando o datasource throws Failure",
-    () async {
-      when(() => localDataSource.delete(user: any(named: 'user')))
-          .thenThrow(Failure(message: ""));
+    test(
+      "Deve retornar um Failure quando o datasource throws Failure",
+      () async {
+        when(() => localDataSource.delete(pokemon: any(named: 'pokemon')))
+            .thenThrow(Failure(message: ""));
 
-      var result = await repository.delete(user: user);
+        var result = await repository.delete(pokemon: pokemon);
 
-      expect(result.fold(id, id), isA<Failure>());
-    },
-  );*/
+        expect(result.fold(id, id), isA<Failure>());
+      },
+    );
+  });
 }

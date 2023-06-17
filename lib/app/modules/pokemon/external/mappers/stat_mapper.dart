@@ -26,4 +26,16 @@ class StatMapper {
       effort: hiveObject.effort,
     );
   }
+
+  static List<StatHiveObject> toHiveList(List list) {
+    return list.map((element) => toHive(element)).toList();
+  }
+
+  static StatHiveObject toHive(StatEntity entity) {
+    return StatHiveObject(
+      name: entity.name,
+      baseStat: entity.baseStat,
+      effort: entity.effort,
+    );
+  }
 }

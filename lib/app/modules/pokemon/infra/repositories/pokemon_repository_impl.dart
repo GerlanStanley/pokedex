@@ -52,7 +52,7 @@ class PokemonRepositoryImpl implements PokemonRepository {
     }
   }
 
-/*@override
+  @override
   Future<Either<Failure, bool>> save({required PokemonEntity pokemon}) async {
     try {
       var response = await _localDataSource.save(pokemon: pokemon);
@@ -70,5 +70,5 @@ class PokemonRepositoryImpl implements PokemonRepository {
     } on Failure catch (e) {
       return Left(e);
     }
-  }*/
+  }
 }

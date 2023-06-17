@@ -29,8 +29,8 @@ void main() {
   });
 
   test(
-    'Deve retornar um Right(List<PokemonEntity>) quando o repository '
-    'retornar um Right(List<PokemonEntity>)',
+    'Deve retornar um Right(List<PokemonResumedEntity>) quando o repository '
+    'retornar um Right(List<PokemonResumedEntity>)',
     () async {
       when(
         () => repository.getAll(params: any(named: "params")),

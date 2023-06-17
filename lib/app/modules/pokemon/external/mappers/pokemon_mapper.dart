@@ -61,4 +61,18 @@ class PokemonMapper {
       stats: StatMapper.fromHiveList(hiveObject.stats),
     );
   }
+
+  static PokemonHiveObject toHive(PokemonEntity entity) {
+    return PokemonHiveObject(
+      id: entity.id,
+      name: entity.name,
+      height: entity.height,
+      weight: entity.weight,
+      image: entity.image,
+      baseExperience: entity.baseExperience,
+      abilities: entity.abilities,
+      types: TypeMapper.toHiveList(entity.types),
+      stats: StatMapper.toHiveList(entity.stats),
+    );
+  }
 }

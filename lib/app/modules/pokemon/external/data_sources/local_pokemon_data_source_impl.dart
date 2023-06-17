@@ -18,7 +18,7 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   Future<List<PokemonResumedEntity>> getAll({
     required GetAllPokemonsParams params,
   }) async {
-    List<PokemonHiveObject> results = box.get(key);
+    List<PokemonHiveObject> results = box.get(key) ?? [];
 
     results = results.sublist(params.offset, params.limit);
 
@@ -29,7 +29,7 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   Future<PokemonEntity?> get({
     required GetPokemonParams params,
   }) async {
-    List<PokemonHiveObject> results = box.get(key);
+    List<PokemonHiveObject> results = box.get(key) ?? [];
 
     var result =
         results.firstWhereOrNull((element) => element.name == params.name);
@@ -38,14 +38,29 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   }
 
   @override
-  Future<bool> delete({required PokemonEntity pokemon}) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<bool> delete({required PokemonEntity pokemon}) async {
+    List<PokemonHiveObject> results = box.get(key) ?? [];
+
+    results.removeWhere((element) => element.id == pokemon.id);
+
+    await box.put(key, results);
+
+    return true;
   }
 
   @override
-  Future<bool> save({required PokemonEntity pokemon}) {
-    // TODO: implement save
-    throw UnimplementedError();
+  Future<bool> save({required PokemonEntity pokemon}) async {
+    List<PokemonHiveObject> results = box.get(key) ?? [];
+
+    var result =
+        results.firstWhereOrNull((element) => element.id == pokemon.id);
+
+    if (result == null) {
+      results.add(PokemonMapper.toHive(pokemon));
+    }
+
+    await box.put(key, results);
+
+    return true;
   }
 }
