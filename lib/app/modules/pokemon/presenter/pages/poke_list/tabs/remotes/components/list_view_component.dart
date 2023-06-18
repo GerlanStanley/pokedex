@@ -42,7 +42,10 @@ class ListViewComponent extends StatelessWidget {
                   );
           }
 
-          return PokemonListItemComponent(pokemon: pokemons[index]);
+          return PokemonListItemComponent(
+            pokemon: pokemons[index],
+            favorite: false,
+          );
         },
       ),
     );

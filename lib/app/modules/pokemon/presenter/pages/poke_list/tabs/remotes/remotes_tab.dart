@@ -21,9 +21,16 @@ class RemotesTab extends StatefulWidget {
   State<RemotesTab> createState() => _RemotesTabState();
 }
 
-class _RemotesTabState extends State<RemotesTab> {
+class _RemotesTabState extends State<RemotesTab>
+    with AutomaticKeepAliveClientMixin {
+  //
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return BlocBuilder<GetAllRemotesPokemonsCubit, GetAllRemotesPokemonsState>(
       bloc: widget.getAllCubit,
       builder: (context, state) {

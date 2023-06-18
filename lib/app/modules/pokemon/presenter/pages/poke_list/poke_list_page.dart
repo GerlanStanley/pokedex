@@ -18,28 +18,41 @@ class _PokeListPageState extends State<PokeListPage>
     with TickerProviderStateMixin {
   //
   late final GetAllRemotesPokemonsCubit getAllCubit;
-  late final TabController tabController;
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
 
-    tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
 
     getAllCubit = Modular.get<GetAllRemotesPokemonsCubit>();
-    getAllCubit.getAll();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+      body: Stack(
         children: [
-          const AppBarComponent(),
-          Expanded(
-            child: TabBarView(
-              controller: tabController,
+          Positioned(
+            right: -(MediaQuery.of(context).size.width / 1.3 / 3),
+            top: -50,
+            child: Image.asset(
+              'assets/images/pokeball_black.png',
+              height: MediaQuery.of(context).size.width / 1.3,
+              width: MediaQuery.of(context).size.width / 1.3,
+              fit: BoxFit.cover,
+              opacity: const AlwaysStoppedAnimation(.15),
+            ),
+          ),
+          NestedScrollView(
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return <Widget>[
+                const SliverToBoxAdapter(child: AppBarComponent()),
+              ];
+            },
+            body: TabBarView(
+              controller: _tabController,
               children: [
                 RemotesTab(getAllCubit: getAllCubit),
                 const FavoritesTab(),
@@ -48,7 +61,7 @@ class _PokeListPageState extends State<PokeListPage>
           ),
         ],
       ),
-      bottomNavigationBar: TabBarComponent(tabController: tabController),
+      bottomNavigationBar: TabBarComponent(tabController: _tabController),
     );
   }
 }

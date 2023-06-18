@@ -34,6 +34,10 @@ class _FavoritesTabState extends State<FavoritesTab> {
     super.dispose();
   }
 
+  void refresh() {
+    getAllCubit.getAll(reset: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllFavoritesPokemonsCubit,
@@ -68,6 +72,7 @@ class _FavoritesTabState extends State<FavoritesTab> {
               ? state.loadLast
               : false,
           getMore: getAllCubit.getAll,
+          refresh: refresh,
         );
       },
     );

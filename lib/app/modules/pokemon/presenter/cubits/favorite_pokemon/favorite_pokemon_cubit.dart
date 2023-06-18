@@ -11,6 +11,7 @@ class FavoritePokemonCubit extends Cubit<FavoritePokemonState> {
   final IsFavoritePokemonUseCase _isFavoritePokemon;
   final SavePokemonUseCase _savePokemon;
   final DeletePokemonUseCase _deletePokemon;
+  bool change = false;
 
   FavoritePokemonCubit(
     this._isFavoritePokemon,
@@ -31,6 +32,8 @@ class FavoritePokemonCubit extends Cubit<FavoritePokemonState> {
 
   void favorite({required PokemonEntity pokemon, required bool value}) async {
     emit(value ? IsFavoriteState() : IsNotFavoriteState());
+
+    change = true;
 
     if (value) {
       var result = await _savePokemon(pokemon: pokemon);

@@ -20,7 +20,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
     required GetAllPokemonsParams params,
   }) async {
     try {
-      List<PokemonHiveObject> results = box.get(key) ?? [];
+      List<PokemonHiveObject> results =
+          box.get(key, defaultValue: [])?.cast<PokemonHiveObject>();
 
       if (params.offset >= results.length) {
         return [];
@@ -47,7 +48,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
     required GetPokemonParams params,
   }) async {
     try {
-      List<PokemonHiveObject> results = box.get(key) ?? [];
+      List<PokemonHiveObject> results =
+          box.get(key, defaultValue: [])?.cast<PokemonHiveObject>();
 
       var result =
           results.firstWhereOrNull((element) => element.name == params.name);
@@ -64,7 +66,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   @override
   Future<bool> save({required PokemonEntity pokemon}) async {
     try {
-      List<PokemonHiveObject> results = box.get(key) ?? [];
+      List<PokemonHiveObject> results =
+          box.get(key, defaultValue: [])?.cast<PokemonHiveObject>();
 
       var result =
           results.firstWhereOrNull((element) => element.id == pokemon.id);
@@ -87,7 +90,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   @override
   Future<bool> delete({required PokemonEntity pokemon}) async {
     try {
-      List<PokemonHiveObject> results = box.get(key) ?? [];
+      List<PokemonHiveObject> results =
+          box.get(key, defaultValue: [])?.cast<PokemonHiveObject>();
 
       results.removeWhere((element) => element.id == pokemon.id);
 
@@ -105,7 +109,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
   @override
   Future<bool> isFavorite({required PokemonEntity pokemon}) async {
     try {
-      List<PokemonHiveObject> results = box.get(key) ?? [];
+      List<PokemonHiveObject> results =
+          box.get(key, defaultValue: [])?.cast<PokemonHiveObject>();
 
       var result =
           results.firstWhereOrNull((element) => element.id == pokemon.id);

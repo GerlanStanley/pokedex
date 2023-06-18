@@ -34,7 +34,7 @@ class GetAllRemotesPokemonsCubit extends Cubit<GetAllRemotesPokemonsState> {
       }, (right) async {
         emit(SuccessGetAllRemotesPokemonsState(
           pokemons: state.pokemons + right,
-          loadLast: right.isEmpty,
+          loadLast: right.isEmpty || right.length < 5,
         ));
       });
     }

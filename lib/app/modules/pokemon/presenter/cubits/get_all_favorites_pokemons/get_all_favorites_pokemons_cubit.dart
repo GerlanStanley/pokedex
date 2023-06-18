@@ -11,14 +11,20 @@ class GetAllFavoritesPokemonsCubit extends Cubit<GetAllFavoritesPokemonsState> {
   GetAllFavoritesPokemonsCubit(this._getAllPokemons)
       : super(const InitialGetAllFavoritesPokemonsState(pokemons: []));
 
-  void getAll() async {
+  void getAll({bool reset = false}) async {
+    if (reset) {
+      emit(const InitialGetAllFavoritesPokemonsState(pokemons: []));
+    }
+
     if (state is! LoadingGetAllFavoritesPokemonsState &&
         (state is! SuccessGetAllFavoritesPokemonsState ||
             !((state as SuccessGetAllFavoritesPokemonsState).loadLast))) {
       //
       emit(LoadingGetAllFavoritesPokemonsState(pokemons: state.pokemons));
 
-      await Future.delayed(const Duration(seconds: 1));
+      if (state.pokemons.isNotEmpty) {
+        await Future.delayed(const Duration(seconds: 1));
+      }
 
       var result = await _getAllPokemons(
         params: GetAllPokemonsParams(
@@ -36,7 +42,7 @@ class GetAllFavoritesPokemonsCubit extends Cubit<GetAllFavoritesPokemonsState> {
       }, (right) async {
         emit(SuccessGetAllFavoritesPokemonsState(
           pokemons: state.pokemons + right,
-          loadLast: right.isEmpty,
+          loadLast: right.isEmpty || right.length < 5,
         ));
       });
     }

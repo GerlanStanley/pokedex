@@ -10,12 +10,14 @@ class ListViewComponent extends StatelessWidget {
   final List<PokemonResumedEntity> pokemons;
   final bool loadLast;
   final Function() getMore;
+  final Function() refresh;
 
   const ListViewComponent({
     Key? key,
     required this.pokemons,
     required this.loadLast,
     required this.getMore,
+    required this.refresh,
   }) : super(key: key);
 
   @override
@@ -42,7 +44,11 @@ class ListViewComponent extends StatelessWidget {
                   );
           }
 
-          return PokemonListItemComponent(pokemon: pokemons[index]);
+          return PokemonListItemComponent(
+            pokemon: pokemons[index],
+            favorite: true,
+            refresh: refresh,
+          );
         },
       ),
     );
