@@ -71,4 +71,16 @@ class PokemonRepositoryImpl implements PokemonRepository {
       return Left(e);
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> isFavorite({
+    required PokemonEntity pokemon,
+  }) async {
+    try {
+      var response = await _localDataSource.isFavorite(pokemon: pokemon);
+      return Right(response);
+    } on Failure catch (e) {
+      return Left(e);
+    }
+  }
 }

@@ -114,4 +114,14 @@ void main() {
       expect(result, isA<bool>());
     });
   });
+
+  group('IsFavorite', () {
+    test('Deve retornar um booleano', () async {
+      when(() => mockBox.get(any())).thenAnswer((_) => null);
+
+      var result = await dataSource.isFavorite(pokemon: pokemon);
+
+      expect(result, isA<bool>());
+    });
+  });
 }

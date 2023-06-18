@@ -5,12 +5,18 @@ import 'package:path_provider/path_provider.dart';
 
 import 'app/app_module.dart';
 import 'app/app_widget.dart';
+import 'app/modules/pokemon/external/hive/hive.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+
+  Hive
+    ..init(appDocumentDirectory.path)
+    ..registerAdapter(PokemonHiveObjectAdapter())
+    ..registerAdapter(TypeHiveObjectAdapter())
+    ..registerAdapter(StatHiveObjectAdapter());
 
   runApp(ModularApp(
     module: AppModule(),

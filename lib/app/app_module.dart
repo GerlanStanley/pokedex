@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hive/hive.dart';
 
 import 'core/helpers/http/http.dart';
+import 'modules/pokemon/external/hive/hive.dart';
 import 'modules/pokemon/pokemon_module.dart';
 import 'modules/splash/presenter/pages/splash_page.dart';
 
@@ -10,7 +11,7 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         AsyncBind<Box>(
-          (i) => Hive.openBox('pokedex'),
+          (i) => Hive.openBox<List<PokemonHiveObject>>('pokedex'),
         ),
         Bind.lazySingleton<Dio>((i) => Dio()),
         Bind.lazySingleton<Interceptor>((i) => CustomInterceptor()),

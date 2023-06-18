@@ -17,4 +17,6 @@ abstract class PokemonRepository {
   Future<Either<Failure, bool>> save({required PokemonEntity pokemon});
 
   Future<Either<Failure, bool>> delete({required PokemonEntity pokemon});
+
+  Future<Either<Failure, bool>> isFavorite({required PokemonEntity pokemon});
 }

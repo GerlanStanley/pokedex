@@ -1,14 +1,16 @@
 import 'package:hive/hive.dart';
 
+part 'stat_hive_object.g.dart';
+
 @HiveType(typeId: 3)
 class StatHiveObject extends HiveObject {
   @HiveField(0)
   final String name;
 
-  @HiveField(0)
+  @HiveField(1)
   final int baseStat;
 
-  @HiveField(0)
+  @HiveField(2)
   final int effort;
 
   StatHiveObject({

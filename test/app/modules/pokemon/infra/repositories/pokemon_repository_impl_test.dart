@@ -266,4 +266,30 @@ void main() {
       },
     );
   });
+
+  group('IsFavorite', () {
+    test(
+      "Deve retornar uma bool quando o datasource retornar bool",
+      () async {
+        when(() => localDataSource.isFavorite(pokemon: any(named: 'pokemon')))
+            .thenAnswer((_) async => true);
+
+        var result = await repository.isFavorite(pokemon: pokemon);
+
+        expect(result.fold(id, id), isA<bool>());
+      },
+    );
+
+    test(
+      "Deve retornar um Failure quando o datasource throws Failure",
+      () async {
+        when(() => localDataSource.isFavorite(pokemon: any(named: 'pokemon')))
+            .thenThrow(Failure(message: ""));
+
+        var result = await repository.isFavorite(pokemon: pokemon);
+
+        expect(result.fold(id, id), isA<Failure>());
+      },
+    );
+  });
 }

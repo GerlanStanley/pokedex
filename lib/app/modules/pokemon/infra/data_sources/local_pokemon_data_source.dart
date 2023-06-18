@@ -11,4 +11,6 @@ abstract class LocalPokemonDataSource {
   Future<bool> save({required PokemonEntity pokemon});
 
   Future<bool> delete({required PokemonEntity pokemon});
+
+  Future<bool> isFavorite({required PokemonEntity pokemon});
 }

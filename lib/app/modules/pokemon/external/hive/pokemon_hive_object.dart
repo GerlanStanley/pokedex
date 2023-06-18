@@ -2,6 +2,8 @@ import 'package:hive/hive.dart';
 
 import 'hive.dart';
 
+part 'pokemon_hive_object.g.dart';
+
 @HiveType(typeId: 1)
 class PokemonHiveObject extends HiveObject {
   @HiveField(0)

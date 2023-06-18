@@ -10,6 +10,7 @@ import '../../../../../core/widgets/load_widget.dart';
 import '../../../domain/entities/entities.dart';
 
 import '../../common_components/common_components.dart';
+import '../../cubits/favorite_pokemon/favorite_pokemon.dart';
 import '../../cubits/get_pokemon/get_pokemon.dart';
 
 import 'components/components.dart';
@@ -25,18 +26,21 @@ class PokemonPage extends StatefulWidget {
 
 class _PokemonPagePageState extends State<PokemonPage> {
   late final GetPokemonCubit getCubit;
+  late final FavoritePokemonCubit favoriteCubit;
 
   @override
   void initState() {
     super.initState();
 
     getCubit = Modular.get<GetPokemonCubit>();
+    favoriteCubit = Modular.get<FavoritePokemonCubit>();
     getCubit.get(widget.pokemon.name);
   }
 
   @override
   void dispose() {
     getCubit.close();
+    favoriteCubit.close();
     super.dispose();
   }
 
@@ -86,9 +90,36 @@ class _PokemonPagePageState extends State<PokemonPage> {
               ),
             ),
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.favorite_outline),
+              BlocConsumer(
+                bloc: getCubit,
+                listener: (context, getState) {
+                  if (getState is SuccessGetPokemonState) {
+                    favoriteCubit.isFavorite(pokemon: getState.pokemon);
+                  }
+                },
+                builder: (context, getState) {
+                  return BlocBuilder(
+                    bloc: favoriteCubit,
+                    builder: (context, favoriteState) {
+                      return favoriteState is! InitialFavoriteState
+                          ? IconButton(
+                              onPressed: () {
+                                favoriteCubit.favorite(
+                                  pokemon: (getState as SuccessGetPokemonState)
+                                      .pokemon,
+                                  value: favoriteState is IsNotFavoriteState,
+                                );
+                              },
+                              icon: Icon(
+                                favoriteState is IsFavoriteState
+                                    ? Icons.favorite_outlined
+                                    : Icons.favorite_outline_outlined,
+                              ),
+                            )
+                          : Container();
+                    },
+                  );
+                },
               ),
             ],
           ),
