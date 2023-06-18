@@ -5,11 +5,13 @@ import 'primary_elevated_button_widget.dart';
 class FailureWidget extends StatelessWidget {
   final String message;
   final Function()? onPressed;
+  final bool white;
 
   const FailureWidget({
     Key? key,
     required this.message,
     this.onPressed,
+    required this.white,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,9 @@ class FailureWidget extends StatelessWidget {
           children: [
             Icon(
               Icons.warning_amber_rounded,
-              color: Theme.of(context).textTheme.titleSmall?.color,
+              color: white
+                  ? Theme.of(context).textTheme.titleSmall?.color
+                  : const Color(0xFF555555),
               size: 80,
             ),
             Container(
@@ -32,7 +36,14 @@ class FailureWidget extends StatelessWidget {
               child: Text(
                 'Ops',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: TextStyle(
+                  fontWeight:
+                      Theme.of(context).textTheme.titleSmall!.fontWeight,
+                  fontSize: Theme.of(context).textTheme.titleSmall!.fontSize,
+                  color: white
+                      ? Theme.of(context).textTheme.titleSmall!.color
+                      : const Color(0xFF555555),
+                ),
               ),
             ),
             Container(
@@ -40,7 +51,14 @@ class FailureWidget extends StatelessWidget {
               child: Text(
                 message,
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: TextStyle(
+                  fontWeight:
+                      Theme.of(context).textTheme.bodyMedium!.fontWeight,
+                  fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
+                  color: white
+                      ? Theme.of(context).textTheme.bodyMedium!.color
+                      : const Color(0xFF555555),
+                ),
               ),
             ),
             Container(

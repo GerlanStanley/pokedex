@@ -17,6 +17,7 @@ import 'infra/data_sources/local_pokemon_data_source.dart';
 import 'infra/data_sources/remote_pokemon_data_source.dart';
 import 'infra/repositories/pokemon_repository_impl.dart';
 import 'presenter/cubits/favorite_pokemon/favorite_pokemon.dart';
+import 'presenter/cubits/get_all_favorites_pokemons/get_all_favorites_pokemons.dart';
 import 'presenter/cubits/get_all_remotes_pokemons/get_all_remotes_pokemons.dart';
 import 'presenter/cubits/get_pokemon/get_pokemon.dart';
 import 'presenter/pages/poke_list/poke_list_page.dart';
@@ -58,6 +59,9 @@ class PokemonModule extends Module {
         // cubits
         Bind.lazySingleton<GetAllRemotesPokemonsCubit>(
           (i) => GetAllRemotesPokemonsCubit(i()),
+        ),
+        Bind.factory<GetAllFavoritesPokemonsCubit>(
+          (i) => GetAllFavoritesPokemonsCubit(i()),
         ),
         Bind.factory<GetPokemonCubit>(
           (i) => GetPokemonCubit(i()),

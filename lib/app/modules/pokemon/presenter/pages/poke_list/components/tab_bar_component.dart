@@ -12,7 +12,6 @@ class TabBarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width / 2);
     return Material(
       color: ColorsConstants.tabBarBackground,
       borderRadius: BorderRadius.circular(16),

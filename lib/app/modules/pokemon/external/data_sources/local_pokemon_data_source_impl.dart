@@ -22,7 +22,16 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
     try {
       List<PokemonHiveObject> results = box.get(key) ?? [];
 
-      results = results.sublist(params.offset, params.limit);
+      if (params.offset >= results.length) {
+        return [];
+      }
+
+      int end = params.offset + params.limit;
+      if (end > results.length) {
+        end = results.length;
+      }
+
+      results = results.sublist(params.offset, end);
 
       return PokemonMapper.resumedFromHiveList(results);
     } catch (e, stackTrace) {
@@ -68,8 +77,6 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
 
       return true;
     } catch (e, stackTrace) {
-      print(e);
-      print(stackTrace);
       throw UnknownFailure(
         message: e.toString(),
         stackTrace: stackTrace,

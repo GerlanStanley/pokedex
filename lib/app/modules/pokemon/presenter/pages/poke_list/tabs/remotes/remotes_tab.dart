@@ -7,7 +7,7 @@ import '../../../../../../../core/widgets/load_widget.dart';
 
 import '../../../../cubits/get_all_remotes_pokemons/get_all_remotes_pokemons.dart';
 
-import 'components/components.dart';
+import 'components/list_view_component.dart';
 
 class RemotesTab extends StatefulWidget {
   final GetAllRemotesPokemonsCubit getAllCubit;
@@ -37,12 +37,13 @@ class _RemotesTabState extends State<RemotesTab> {
           return FailureWidget(
             message: state.error,
             onPressed: widget.getAllCubit.getAll,
+            white: false,
           );
         } else if (state is SuccessGetAllRemotesPokemonsState &&
             state.pokemons.isEmpty) {
           //
           return const EmptyListWidget(
-            iconData: Icons.videogame_asset_outlined,
+            iconData: Icons.workspaces_outline,
             title: "No pokemon",
             subtitle: "We couldn't find any pokemon in the database",
           );
@@ -50,6 +51,9 @@ class _RemotesTabState extends State<RemotesTab> {
 
         return ListViewComponent(
           pokemons: state.pokemons,
+          loadLast: (state is SuccessGetAllRemotesPokemonsState)
+              ? state.loadLast
+              : false,
           getMore: widget.getAllCubit.getAll,
         );
       },

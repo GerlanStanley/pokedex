@@ -163,6 +163,7 @@ class _PokemonPagePageState extends State<PokemonPage> {
                         return FailureWidget(
                           message: state.error,
                           onPressed: () => getCubit.get(widget.pokemon.name),
+                          white: true,
                         );
                       } else if (state is SuccessGetPokemonState) {
                         return Column(
