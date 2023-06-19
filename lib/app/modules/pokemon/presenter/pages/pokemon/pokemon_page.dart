@@ -128,6 +128,7 @@ class _PokemonPagePageState extends State<PokemonPage> {
                                   );
                                 },
                                 icon: Icon(
+                                  key: const Key('favorite-icon-key'),
                                   favoriteState is IsFavoriteState
                                       ? Icons.favorite_outlined
                                       : Icons.favorite_outline_outlined,

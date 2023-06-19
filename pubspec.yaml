@@ -54,6 +54,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  modular_test: ^2.0.0
   bloc_test:
   mocktail:
   faker:
