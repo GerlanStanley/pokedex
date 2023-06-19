@@ -29,7 +29,7 @@ class GetAllFavoritesPokemonsCubit extends Cubit<GetAllFavoritesPokemonsState> {
       var result = await _getAllPokemons(
         params: GetAllPokemonsParams(
           offset: state.pokemons.length,
-          limit: 5,
+          limit: 10,
           saved: true,
         ),
       );

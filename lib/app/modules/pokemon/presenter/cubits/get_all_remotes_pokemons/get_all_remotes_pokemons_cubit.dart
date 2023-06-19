@@ -21,7 +21,7 @@ class GetAllRemotesPokemonsCubit extends Cubit<GetAllRemotesPokemonsState> {
       var result = await _getAllPokemons(
         params: GetAllPokemonsParams(
           offset: state.pokemons.length,
-          limit: 5,
+          limit: 10,
           saved: false,
         ),
       );
