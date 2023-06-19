@@ -59,7 +59,8 @@ class _PokemonPagePageState extends State<PokemonPage> {
       child: Stack(
         children: [
           Hero(
-            tag: "card-${widget.favorite ? 'favorite' : ''}-${widget.pokemon.id}",
+            tag:
+                "card-${widget.favorite ? 'favorite' : ''}-${widget.pokemon.id}",
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -93,6 +94,13 @@ class _PokemonPagePageState extends State<PokemonPage> {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               centerTitle: false,
+              leading: IconButton(
+                key: const Key('back-button'),
+                onPressed: () {
+                  Navigator.pop(context, favoriteCubit.change);
+                },
+                icon: const Icon(Icons.arrow_back_ios_outlined),
+              ),
               title: Text(
                 '#${widget.pokemon.id.toString().padLeft(3, '0')}',
                 style: TextStyle(
@@ -120,10 +128,12 @@ class _PokemonPagePageState extends State<PokemonPage> {
                       builder: (context, favoriteState) {
                         return favoriteState is! InitialFavoriteState
                             ? IconButton(
+                                key: const Key('favorite-button'),
                                 onPressed: () {
                                   favoriteCubit.favorite(
-                                    pokemon: (getState as SuccessGetPokemonState)
-                                        .pokemon,
+                                    pokemon:
+                                        (getState as SuccessGetPokemonState)
+                                            .pokemon,
                                     value: favoriteState is IsNotFavoriteState,
                                   );
                                 },
@@ -165,8 +175,10 @@ class _PokemonPagePageState extends State<PokemonPage> {
                               .displayLarge!
                               .color!
                               .withOpacity(0.9),
-                          fontSize:
-                              Theme.of(context).textTheme.displayLarge!.fontSize,
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .displayLarge!
+                              .fontSize,
                           fontWeight: Theme.of(context)
                               .textTheme
                               .displayLarge!

@@ -53,7 +53,7 @@ void main() {
     registerFallbackValue(const GetAllPokemonsParams(
       limit: 2,
       offset: 0,
-      saved: false,
+      saved: true,
     ));
 
     registerFallbackValue(const GetPokemonParams(name: 'bulbasaur'));
@@ -64,11 +64,11 @@ void main() {
       var params = const GetAllPokemonsParams(
         limit: 2,
         offset: 0,
-        saved: false,
+        saved: true,
       );
 
       when(
-        () => mockBox.get(any()),
+        () => mockBox.get(any(), defaultValue: any(named: 'defaultValue')),
       ).thenAnswer((_) => [pokemonHive, pokemonHive]);
 
       var result = await dataSource.getAll(params: params);
@@ -81,7 +81,9 @@ void main() {
     test('Deve retornar um PokemonEntity', () async {
       var params = const GetPokemonParams(name: 'bulbasaur');
 
-      when(() => mockBox.get(any())).thenAnswer((_) => [pokemonHive]);
+      when(
+        () => mockBox.get(any(), defaultValue: any(named: 'defaultValue')),
+      ).thenAnswer((_) => [pokemonHive]);
 
       var result = await dataSource.get(params: params);
 
@@ -91,7 +93,10 @@ void main() {
 
   group('Save', () {
     test('Deve retornar um booleano', () async {
-      when(() => mockBox.get(any())).thenAnswer((_) => null);
+      when(
+        () => mockBox.get(any(), defaultValue: any(named: 'defaultValue')),
+      ).thenAnswer((_) => []);
+
       when(() => mockBox.put(any(), any())).thenAnswer((_) async {
         return;
       });
@@ -104,7 +109,10 @@ void main() {
 
   group('Delete', () {
     test('Deve retornar um booleano', () async {
-      when(() => mockBox.get(any())).thenAnswer((_) => null);
+      when(
+        () => mockBox.get(any(), defaultValue: any(named: 'defaultValue')),
+      ).thenAnswer((_) => []);
+
       when(() => mockBox.put(any(), any())).thenAnswer((_) async {
         return;
       });
@@ -117,7 +125,9 @@ void main() {
 
   group('IsFavorite', () {
     test('Deve retornar um booleano', () async {
-      when(() => mockBox.get(any())).thenAnswer((_) => null);
+      when(
+        () => mockBox.get(any(), defaultValue: any(named: 'defaultValue')),
+      ).thenAnswer((_) => []);
 
       var result = await dataSource.isFavorite(pokemon: pokemon);
 

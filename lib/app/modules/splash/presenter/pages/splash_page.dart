@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../../../core/constants/constants.dart';
-
 import '../../../../core/widgets/empty_list_widget.dart';
 import '../../../../core/widgets/failure_widget.dart';
 import '../../../../core/widgets/load_widget.dart';
+
 import '../../../pokemon/presenter/cubits/get_all_remotes_pokemons/get_all_remotes_pokemons.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,10 +31,11 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsConstants.primary,
-      body: BlocConsumer<GetAllRemotesPokemonsCubit, GetAllRemotesPokemonsState>(
+      body:
+          BlocConsumer<GetAllRemotesPokemonsCubit, GetAllRemotesPokemonsState>(
         bloc: getAllCubit,
         listener: (context, state) {
-          if (state is SuccessGetAllRemotesPokemonsState&&
+          if (state is SuccessGetAllRemotesPokemonsState &&
               state.pokemons.isNotEmpty) {
             //
             Modular.to.navigate('/pokemon/');

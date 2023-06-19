@@ -36,6 +36,8 @@ class LocalPokemonDataSourceImpl implements LocalPokemonDataSource {
 
       return PokemonMapper.resumedFromHiveList(results);
     } catch (e, stackTrace) {
+      print(e);
+      print(stackTrace);
       throw UnknownFailure(
         message: e.toString(),
         stackTrace: stackTrace,

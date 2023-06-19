@@ -12,11 +12,17 @@ void main() async {
 
   final appDocumentDirectory = await getApplicationDocumentsDirectory();
 
-  Hive
-    ..init(appDocumentDirectory.path)
-    ..registerAdapter(PokemonHiveObjectAdapter())
-    ..registerAdapter(TypeHiveObjectAdapter())
-    ..registerAdapter(StatHiveObjectAdapter());
+  Hive.init(appDocumentDirectory.path);
+
+  if (!Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(PokemonHiveObjectAdapter());
+  }
+  if (!Hive.isAdapterRegistered(2)) {
+    Hive.registerAdapter(TypeHiveObjectAdapter());
+  }
+  if (!Hive.isAdapterRegistered(3)) {
+    Hive.registerAdapter(StatHiveObjectAdapter());
+  }
 
   runApp(ModularApp(
     module: AppModule(),
