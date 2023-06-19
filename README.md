@@ -4,7 +4,7 @@
 
 # Pokédex
 Esse é um app desenvolvido em flutter/dart inspirado em uma Pokédex;
-- O app exibe uma listagem paginadas dos Pokémons;
+- O app exibe uma listagem paginada de Pokémons;
 - Exibe os dados de cada pokémon separadamente;
 - É possível adicionar o pokémon nos favoritos (armazenando os dados localmente);
 - É possível ver os pokémons salvos localmente e offline em uma listagem separada;
