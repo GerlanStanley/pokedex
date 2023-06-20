@@ -31,7 +31,7 @@ Passo 1: [Instale o Flutter](https://docs.flutter.dev/get-started/install)
 
 Passo 2: Baixe ou clone este repositório usando o link abaixo:
 ```
-https://github.com/GerlanStanley/mcu.git
+https://github.com/GerlanStanley/pokedex.git
 ```
 
 Passo 3: Vá para a raiz do projeto e execute o seguinte comando no console para obter as dependências necessárias:
